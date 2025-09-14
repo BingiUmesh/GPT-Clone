@@ -16,7 +16,11 @@ export default function Sidebar() {
   } = useContext(MyContext);
   const getAllThreads = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/thread");
+      // dev
+      // const response = await fetch("http://localhost:8080/api/thread"); 
+
+      //prod
+      const response = await fetch("https://gpt-clone-5op8.onrender.com/api/thread")
       const res = await response.json();
       // we need to store threadId,title
       const filterData = res.map((thread) => ({
@@ -45,7 +49,8 @@ export default function Sidebar() {
     setCurrThreadID(newThreadId);
     try {
       const response = await fetch(
-        `http://localhost:8080/api/thread/${newThreadId}`
+       // `http://localhost:8080/api/thread/${newThreadId}`
+       `https://gpt-clone-5op8.onrender.com/api/thread/${newThreadId}`
       );
       const res = await response.json();
       setPrevChats(res);
@@ -60,7 +65,8 @@ export default function Sidebar() {
   const deleteThread = async (threadId) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/thread/${threadId}`,
+        // `http://localhost:8080/api/thread/${threadId}`,
+        `https://gpt-clone-5op8.onrender.com/api/thread/${threadId}`,
         { method: "DELETE" }
       );
       const res = await response.json();
